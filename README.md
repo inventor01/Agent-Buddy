@@ -82,10 +82,14 @@ you'd rather point at a different OpenAI-compatible provider later.
 
 1. Push this repo to GitHub, then in Railway: **New Project → Deploy from
    GitHub repo** and pick it.
-2. Railway auto-detects Node via Nixpacks; `railway.json` in this repo pins
-   the build to `npm ci && npm run build` and the start command to
-   `npm run start` (`node .output/server/index.mjs` — a plain Node server,
-   not the Cloudflare Worker build Lovable's sandbox defaults to).
+2. Railway auto-detects Node via Nixpacks, which already installs
+   dependencies with `npm ci` in its own install phase; `railway.json` in
+   this repo only pins the build command to `npm run build` (don't add a
+   second `npm ci` there — Nixpacks' layer caching and a repeated `npm ci`
+   don't get along, and it'll fail with an `EBUSY` on `node_modules/.cache`)
+   and the start command to `npm run start`
+   (`node .output/server/index.mjs` — a plain Node server, not the
+   Cloudflare Worker build Lovable's sandbox defaults to).
 3. In the Railway service's **Variables** tab, paste in everything from
    `.env.example` with real values (section above).
 4. Deploy. Railway assigns a public domain under **Settings → Networking →
