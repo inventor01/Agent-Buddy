@@ -1,11 +1,12 @@
 import { createOpenAICompatible } from "@ai-sdk/openai-compatible";
 
-export function createLovableAiGatewayProvider(apiKey: string) {
+/** Groq: free tier, OpenAI-compatible endpoint, no credit card. console.groq.com */
+export function createAiProvider(apiKey: string) {
   return createOpenAICompatible({
-    name: "lovable",
-    baseURL: "https://ai.gateway.lovable.dev/v1",
-    headers: { "Lovable-API-Key": apiKey },
+    name: "groq",
+    baseURL: "https://api.groq.com/openai/v1",
+    headers: { Authorization: `Bearer ${apiKey}` },
   });
 }
 
-export const CHAT_MODEL = "google/gemini-3.7-flash";
+export const CHAT_MODEL = "llama-3.3-70b-versatile";

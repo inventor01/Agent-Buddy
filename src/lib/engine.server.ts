@@ -1,6 +1,6 @@
 import { streamText } from "ai";
 import { z } from "zod";
-import { createLovableAiGatewayProvider, CHAT_MODEL } from "./ai-gateway.server";
+import { createAiProvider, CHAT_MODEL } from "./ai-gateway.server";
 import { couponSourceUrls, fetchSources } from "./sources.server";
 
 export interface DealItem {
@@ -40,9 +40,9 @@ const VOICE_HINT: Record<string, string> = {
 };
 
 function gateway() {
-  const key = process.env["LOVABLE_API_KEY"];
+  const key = process.env["GROQ_API_KEY"];
   if (!key) throw new Error("AI is not set up yet.");
-  return createLovableAiGatewayProvider(key);
+  return createAiProvider(key);
 }
 
 const DealSchema = z.object({

@@ -1,7 +1,7 @@
 import { createServerFn } from "@tanstack/react-start";
 import { streamText, Output } from "ai";
 import { z } from "zod";
-import { createLovableAiGatewayProvider, CHAT_MODEL } from "./ai-gateway.server";
+import { createAiProvider, CHAT_MODEL } from "./ai-gateway.server";
 
 const BuildInput = z.object({ sentence: z.string().min(1) });
 
@@ -16,9 +16,9 @@ const BuildOutput = z.object({
 });
 
 function gateway() {
-  const key = process.env["LOVABLE_API_KEY"];
+  const key = process.env["GROQ_API_KEY"];
   if (!key) throw new Error("AI is not set up yet.");
-  return createLovableAiGatewayProvider(key);
+  return createAiProvider(key);
 }
 
 export const buildAgentFromSentence = createServerFn({ method: "POST" })

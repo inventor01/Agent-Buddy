@@ -73,10 +73,12 @@ a Lovable-hosted URL, update that job's target URL to your new domain — a
 Railway "Cron Jobs" service works too if you'd rather keep it off Supabase.
 
 ### 5. AI
-`LOVABLE_API_KEY` (from your Lovable project's API settings) powers "build my
-helper from one sentence" and the daily run write-ups, via Lovable's AI
-gateway (`src/lib/ai-gateway.server.ts`). Swap that file's `baseURL`/model if
-you'd rather point at a different OpenAI-compatible provider later.
+`GROQ_API_KEY` powers "build my helper from one sentence" and the daily run
+write-ups, via Groq's free, OpenAI-compatible API (`src/lib/ai-gateway.server.ts`,
+model `llama-3.3-70b-versatile`) — no credit card, sign up at
+[console.groq.com](https://console.groq.com), API Keys → Create API Key.
+Swap that file's `baseURL`/model if you'd rather point at a different
+OpenAI-compatible provider later (Lovable's own gateway, OpenRouter, etc).
 
 ## Deploying to Railway
 
