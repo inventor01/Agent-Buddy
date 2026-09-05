@@ -1,0 +1,27 @@
+{
+  "version": "7",
+  "dialect": "postgresql",
+  "entries": [
+    {
+      "idx": 0,
+      "version": "7",
+      "when": 1788583846043,
+      "tag": "0000_create_buddies_and_runs",
+      "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "7",
+      "when": 1788584530880,
+      "tag": "0001_create_workspaces_branding_plans",
+      "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "7",
+      "when": 1788930000000,
+      "tag": "0002_add_notification_prefs",
+      "breakpoints": true
+    }
+  ]
+}

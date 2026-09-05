@@ -1,0 +1,191 @@
+@import "tailwindcss" source(none);
+@source "../src";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --radius-2xl: calc(var(--radius) + 8px);
+  --radius-3xl: calc(var(--radius) + 12px);
+  --radius-4xl: calc(var(--radius) + 16px);
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-ink: var(--ink);
+  --color-brand: var(--brand);
+  --color-brand-soft: var(--brand-soft);
+  --color-canvas: var(--canvas);
+  --color-mist: var(--mist);
+  --color-good: var(--good);
+  --font-display: var(--font-display-family);
+  --font-body: var(--font-body-family);
+  --font-hand: var(--font-hand-family);
+}
+
+:root {
+  --radius: 1.25rem;
+  --font-display-family: "Outfit", ui-sans-serif, system-ui, sans-serif;
+  --font-body-family: "Figtree", ui-sans-serif, system-ui, sans-serif;
+  --font-hand-family: "Caveat", ui-serif, cursive;
+
+  --ink: oklch(0.22 0.02 60);
+  --brand: oklch(0.5 0.13 45);
+  --brand-soft: oklch(0.97 0.05 95);
+  --canvas: oklch(0.94 0.022 85);
+  --mist: oklch(0.965 0.015 85);
+  --good: oklch(0.45 0 0);
+
+  --background: var(--canvas);
+  --foreground: var(--ink);
+  --card: var(--canvas);
+  --card-foreground: var(--ink);
+  --popover: var(--canvas);
+  --popover-foreground: var(--ink);
+  --primary: var(--brand);
+  --primary-foreground: oklch(0.99 0 0);
+  --secondary: var(--mist);
+  --secondary-foreground: var(--ink);
+  --muted: var(--mist);
+  --muted-foreground: oklch(0.52 0.012 165);
+  --accent: var(--brand-soft);
+  --accent-foreground: var(--brand);
+  --destructive: oklch(0.55 0.19 25);
+  --destructive-foreground: oklch(0.99 0 0);
+  --border: oklch(0.19 0.012 165 / 10%);
+  --input: oklch(0.19 0.012 165 / 12%);
+  --ring: var(--brand);
+}
+
+/* Liquid glass — frosted, lightly tinted, with a soft inner highlight. */
+@utility glass {
+  background: linear-gradient(
+    145deg,
+    color-mix(in oklab, white 82%, transparent),
+    color-mix(in oklab, white 58%, transparent)
+  );
+  -webkit-backdrop-filter: blur(24px) saturate(180%);
+  backdrop-filter: blur(24px) saturate(180%);
+  border: 1px solid color-mix(in oklab, white 75%, transparent);
+  box-shadow:
+    0 1px 0 0 rgba(255, 255, 255, 0.9) inset,
+    0 -1px 0 0 rgba(255, 255, 255, 0.35) inset,
+    0 18px 50px -28px color-mix(in oklab, var(--ink) 45%, transparent),
+    0 2px 10px -6px color-mix(in oklab, var(--ink) 22%, transparent);
+}
+
+@utility glass-soft {
+  background: color-mix(in oklab, white 55%, transparent);
+  -webkit-backdrop-filter: blur(16px) saturate(160%);
+  backdrop-filter: blur(16px) saturate(160%);
+  border: 1px solid color-mix(in oklab, white 70%, transparent);
+  box-shadow:
+    0 1px 0 0 rgba(255, 255, 255, 0.8) inset,
+    0 10px 30px -22px color-mix(in oklab, var(--ink) 40%, transparent);
+}
+
+@utility glass-tint {
+  background: linear-gradient(
+    145deg,
+    color-mix(in oklab, var(--brand) 12%, white 76%),
+    color-mix(in oklab, var(--brand) 6%, white 62%)
+  );
+  -webkit-backdrop-filter: blur(20px) saturate(170%);
+  backdrop-filter: blur(20px) saturate(170%);
+  border: 1px solid color-mix(in oklab, var(--brand) 18%, white 60%);
+  box-shadow:
+    0 1px 0 0 rgba(255, 255, 255, 0.85) inset,
+    0 18px 44px -28px color-mix(in oklab, var(--brand) 60%, transparent);
+}
+
+@utility lift {
+  box-shadow:
+    0 1px 0 0 rgba(255, 255, 255, 0.6) inset,
+    0 20px 45px -24px color-mix(in oklab, var(--brand) 55%, transparent);
+}
+
+@utility board {
+  background-color: var(--canvas);
+  background-image: radial-gradient(rgba(120, 95, 60, 0.09) 1px, transparent 1px);
+  background-size: 14px 14px;
+}
+
+@utility note {
+  box-shadow: 0 18px 34px -22px rgba(60, 45, 25, 0.6);
+}
+
+@keyframes mic-ring {
+  0% {
+    transform: scale(1);
+    opacity: 0.5;
+  }
+  100% {
+    transform: scale(1.7);
+    opacity: 0;
+  }
+}
+
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@utility rise {
+  animation: rise 0.45s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+@layer base {
+  * {
+    border-color: var(--color-border);
+  }
+
+  html {
+    -webkit-font-smoothing: antialiased;
+  }
+
+  body {
+    background-color: var(--color-canvas);
+    color: var(--color-ink);
+    font-family: var(--font-body-family);
+  }
+
+  h1,
+  h2,
+  h3 {
+    font-family: var(--font-display-family);
+    letter-spacing: -0.02em;
+  }
+
+  ::selection {
+    background: color-mix(in oklab, var(--brand) 22%, transparent);
+  }
+}
+
+.bigtext {
+  font-size: 118%;
+}
