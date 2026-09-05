@@ -9,4 +9,6 @@ export function createAiProvider(apiKey: string) {
   });
 }
 
-export const CHAT_MODEL = "llama-3.3-70b-versatile";
+// Groq deprecated its Llama chat models in Aug 2026; gpt-oss-120b is the
+// current general-purpose replacement (console.groq.com/docs/deprecations).
+export const CHAT_MODEL = "openai/gpt-oss-120b";

@@ -2,6 +2,7 @@ import { streamText } from "ai";
 import { z } from "zod";
 import { createAiProvider, CHAT_MODEL } from "./ai-gateway.server";
 import { couponSourceUrls, fetchSources } from "./sources.server";
+import { parseJsonBlock } from "./json-extract";
 
 export interface DealItem {
   [key: string]: string | boolean;
@@ -58,19 +59,6 @@ const DealSchema = z.object({
   ),
 });
 
-/** Pull the first JSON object out of a model reply. */
-function parseJsonBlock(raw: string): unknown {
-  const cleaned = raw.replace(/```json/gi, "```").split("```").join("\n");
-  const start = cleaned.indexOf("{");
-  const end = cleaned.lastIndexOf("}");
-  if (start === -1 || end <= start) return null;
-  try {
-    return JSON.parse(cleaned.slice(start, end + 1));
-  } catch {
-    return null;
-  }
-}
-
 /** Read real, currently-listed offers for a store out of live public pages. */
 export async function collectDeals(store: string) {
   const urls = couponSourceUrls(store);
@@ -125,8 +113,6 @@ async function writeMessage(buddy: BuddySpec, facts: string, extra?: string) {
   });
   return (await result.text).trim();
 }
-
-
 
 /** Parse "Name — Month Day" lines from a birthday list. */
 function parseBirthdays(people: string) {

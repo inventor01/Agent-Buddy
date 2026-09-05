@@ -1,7 +1,8 @@
 import { createServerFn } from "@tanstack/react-start";
-import { streamText, Output } from "ai";
+import { streamText } from "ai";
 import { z } from "zod";
 import { createAiProvider, CHAT_MODEL } from "./ai-gateway.server";
+import { parseJsonBlock } from "./json-extract";
 
 const BuildInput = z.object({ sentence: z.string().min(1) });
 
@@ -34,11 +35,14 @@ export const buildAgentFromSentence = createServerFn({ method: "POST" })
         "tagline: one short sentence about what it does.",
         "schedule: plain words like 'Every Tuesday · 9:00 AM' or 'When I ask'.",
         "when/then/tell: one short plain-language line each.",
+        'Reply with JSON only, in this exact shape: {"name":"","emoji":"","tagline":"","schedule":"","when":"","then":"","tell":""}',
       ].join(" "),
       prompt: data.sentence,
-      output: Output.object({ schema: BuildOutput }),
     });
-    return await result.output;
+    const parsed = BuildOutput.safeParse(parseJsonBlock(await result.text));
+    if (!parsed.success)
+      throw new Error("Your helper couldn't quite figure that out — try rephrasing it.");
+    return parsed.data;
   });
 
 const RunInput = z.object({
